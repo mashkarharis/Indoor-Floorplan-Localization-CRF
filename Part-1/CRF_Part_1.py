@@ -244,44 +244,9 @@ plt.show()
 
 # Now We can see that the area where measurements are taken
 
-# Now let's select random points to create graphs. In here we should **create several connected graph and give them unique graph ids**. However, the map we selected contains only one connected graph.
-
-# After drawing several map graphs found that random state 31 gives best graph, but need some adjustments.
+# Now let's select some points to create graphs. In here we should **create several connected graph and give them unique graph ids**. However, the map we selected contains only one connected graph.
 
 # In[10]:
-
-
-graph=[] # contains list of dictionaries which has fields namely -> "nodeid","x_dir_pixels","y_dir_pixels","connected_graph_id"
-randomly_selected_subset=updated_df.sample(n = number_of_node_in_graph, random_state = 31)
-i=0
-for row in randomly_selected_subset.itertuples():
-    graph.append({"nodeid":i,"x_dir_pixels":row[4],"y_dir_pixels":row[5],"connected_graph_id":"G1"})
-    i+=1
-
-
-# Let's draw graph,
-
-# In[11]:
-
-
-floorplan1 = image.imread('lougheed_00 - Copy.png')
-plt.figure(figsize = (10,10))
-plt.imshow(floorplan1)
-for row in graph:
-    plt.plot(row["x_dir_pixels"],row["y_dir_pixels"] , marker='*', color="blue")
-plt.show()
-
-
-# Doing Adjustments
-
-# In[12]:
-
-
-graphtable=pd.DataFrame(graph)
-graphtable
-
-
-# In[13]:
 
 
 graph=[{'nodeid': 0, 'x_dir_pixels': 392, 'y_dir_pixels': 285, 'connected_graph_id': 'G1'}, {'nodeid': 1, 'x_dir_pixels': 283, 'y_dir_pixels': 353, 'connected_graph_id': 'G1'}, {'nodeid': 2, 'x_dir_pixels': 445, 'y_dir_pixels': 357, 'connected_graph_id': 'G1'}, {'nodeid': 3, 'x_dir_pixels': 447, 'y_dir_pixels': 442, 'connected_graph_id': 'G1'}, {'nodeid': 4, 'x_dir_pixels': 280, 'y_dir_pixels': 270, 'connected_graph_id': 'G1'}, {'nodeid': 5, 'x_dir_pixels': 308, 'y_dir_pixels': 228, 'connected_graph_id': 'G1'}, {'nodeid': 6, 'x_dir_pixels': 283, 'y_dir_pixels': 415, 'connected_graph_id': 'G1'}, {'nodeid': 7, 'x_dir_pixels': 260, 'y_dir_pixels': 550, 'connected_graph_id': 'G1'}, {'nodeid': 8, 'x_dir_pixels': 265, 'y_dir_pixels': 493, 'connected_graph_id': 'G1'}, {'nodeid': 9, 'x_dir_pixels': 269, 'y_dir_pixels': 436, 'connected_graph_id': 'G1'}, {'nodeid': 10, 'x_dir_pixels': 261, 'y_dir_pixels': 513, 'connected_graph_id': 'G1'}, {'nodeid': 11, 'x_dir_pixels': 258, 'y_dir_pixels': 470, 'connected_graph_id': 'G1'}, {'nodeid': 12, 'x_dir_pixels': 390, 'y_dir_pixels': 500, 'connected_graph_id': 'G1'}, {'nodeid': 13, 'x_dir_pixels': 341, 'y_dir_pixels': 500, 'connected_graph_id': 'G1'}, {'nodeid': 14, 'x_dir_pixels': 263, 'y_dir_pixels': 449, 'connected_graph_id': 'G1'}, {'nodeid': 15, 'x_dir_pixels': 266, 'y_dir_pixels': 366, 'connected_graph_id': 'G1'}, {'nodeid': 16, 'x_dir_pixels': 275, 'y_dir_pixels': 319, 'connected_graph_id': 'G1'}, {'nodeid': 17, 'x_dir_pixels': 282, 'y_dir_pixels': 463, 'connected_graph_id': 'G1'}, {'nodeid': 18, 'x_dir_pixels': 282, 'y_dir_pixels': 306, 'connected_graph_id': 'G1'}, {'nodeid': 19, 'x_dir_pixels': 440, 'y_dir_pixels': 500, 'connected_graph_id': 'G1'}, {'nodeid': 20, 'x_dir_pixels': 286, 'y_dir_pixels': 331, 'connected_graph_id': 'G1'}, {'nodeid': 21, 'x_dir_pixels': 283, 'y_dir_pixels': 332, 'connected_graph_id': 'G1'}, {'nodeid': 22, 'x_dir_pixels': 285, 'y_dir_pixels': 369, 'connected_graph_id': 'G1'}, {'nodeid': 23, 'x_dir_pixels': 230, 'y_dir_pixels': 540, 'connected_graph_id': 'G1'}, {'nodeid': 24, 'x_dir_pixels': 438, 'y_dir_pixels': 323, 'connected_graph_id': 'G1'}, {'nodeid': 25, 'x_dir_pixels': 289, 'y_dir_pixels': 390, 'connected_graph_id': 'G1'}, {'nodeid': 26, 'x_dir_pixels': 329, 'y_dir_pixels': 240, 'connected_graph_id': 'G1'}, {'nodeid': 27, 'x_dir_pixels': 200, 'y_dir_pixels': 550, 'connected_graph_id': 'G1'}, {'nodeid': 28, 'x_dir_pixels': 371, 'y_dir_pixels': 265, 'connected_graph_id': 'G1'}, {'nodeid': 29, 'x_dir_pixels': 282, 'y_dir_pixels': 242, 'connected_graph_id': 'G1'}]
@@ -289,9 +254,9 @@ graphtable=pd.DataFrame(graph)
 graphtable
 
 
-# Draw Updated Graph
+# Let's draw graph,
 
-# In[14]:
+# In[11]:
 
 
 floorplan1 = image.imread('lougheed_00 - Copy.png')
@@ -309,7 +274,7 @@ plt.show()
 
 # Let's revisit updated_df
 
-# In[15]:
+# In[12]:
 
 
 updated_df
@@ -317,7 +282,7 @@ updated_df
 
 # Denfine Helper Functions
 
-# In[16]:
+# In[13]:
 
 
 def calcVelocityVal(prev_row,row):
@@ -347,7 +312,7 @@ def calcNearestState(row):
 
 # Now let's calculate velocities and nearest states
 
-# In[17]:
+# In[14]:
 
 
 velocity_value=["N/A"]
@@ -384,7 +349,7 @@ updated_df["isValid"]=isValid
 
 # Let's check new dataframe
 
-# In[18]:
+# In[15]:
 
 
 updated_df
@@ -392,7 +357,7 @@ updated_df
 
 # Now lets created filtered dataframe which only contains, required columns and valid values
 
-# In[19]:
+# In[16]:
 
 
 filtered_df=updated_df.copy()
@@ -404,13 +369,13 @@ filtered_df.head()
 
 # Let's check first index of second data set
 
-# In[20]:
+# In[17]:
 
 
 print(filtered_df.loc[873:877])
 
 
-# In[21]:
+# In[18]:
 
 
 first_index_of_second_set=875
@@ -418,7 +383,7 @@ first_index_of_second_set=875
 
 # Now Let's create a dataset
 
-# In[22]:
+# In[19]:
 
 
 data=[]
@@ -426,7 +391,6 @@ for row in filtered_df.loc[19:first_index_of_second_set-1].itertuples():
     datadict={}
     start_x = filtered_df.loc[row[0]-19][1]
     start_y = filtered_df.loc[row[0]-19][2]
-    state = row[6]
     datadict["startX"]=start_x
     datadict["startY"]=start_y
     i=0
@@ -437,15 +401,17 @@ for row in filtered_df.loc[19:first_index_of_second_set-1].itertuples():
     for subrow in filtered_df.loc[row[0]-19:row[0]].itertuples():
         datadict["velocity_angle_"+str(j+1)]=subrow[5]
         j+=1
-        
-    datadict["currentState"]=state
+    k=0
+    for subrow in filtered_df.loc[row[0]-19:row[0]].itertuples():
+        datadict["state_"+str(k+1)]=subrow[6]
+        k+=1
     data.append(datadict)
 
 prepared_dataset1=pd.DataFrame(data)
 prepared_dataset1
 
 
-# In[23]:
+# In[20]:
 
 
 data=[]
@@ -453,7 +419,6 @@ for row in filtered_df.loc[first_index_of_second_set:].itertuples():
     datadict={}
     start_x = filtered_df.loc[row[0]-19][1]
     start_y = filtered_df.loc[row[0]-19][2]
-    state = row[6]
     datadict["startX"]=start_x
     datadict["startY"]=start_y
     i=0
@@ -464,15 +429,17 @@ for row in filtered_df.loc[first_index_of_second_set:].itertuples():
     for subrow in filtered_df.loc[row[0]-19:row[0]].itertuples():
         datadict["velocity_angle_"+str(j+1)]=subrow[5]
         j+=1
-        
-    datadict["currentState"]=state
+    k=0
+    for subrow in filtered_df.loc[row[0]-19:row[0]].itertuples():
+        datadict["state_"+str(k+1)]=subrow[6]
+        k+=1
     data.append(datadict)
 
 prepared_dataset2=pd.DataFrame(data)
 prepared_dataset2
 
 
-# In[24]:
+# In[21]:
 
 
 final_prepared_dataset=pd.concat([prepared_dataset1,prepared_dataset2])
@@ -484,7 +451,7 @@ final_prepared_dataset
 
 # Now let's save out results
 
-# In[25]:
+# In[22]:
 
 
 graphtable.to_csv("floor_plan_graph.csv", encoding='utf-8', index=False)
